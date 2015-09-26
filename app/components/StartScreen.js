@@ -6,24 +6,24 @@ export class StartScreen extends React.Component {
 
     static defaultProps = {
         onConnect: null,
-        onEditDetails: null,
+        onEditProfile: null,
         onShowConnections: null
     }
 
     render() {
 
-        var { onConnect, onEditDetails, onShowConnections } = this.props;
+        var { onConnect, onEditProfile, onShowConnections } = this.props;
 
         return (
             <div>
                 <Button block bsStyle="primary" onClick={onConnect}>Connect!</Button>
                 <hr />
-                <Button block bsStyle="default" onEditDetails={onConnect}>
+                <Button block bsStyle="default" onClick={onEditProfile}>
                     <Glyphicon glyph="user" />
                     <span> </span>
                     Me
                 </Button>
-                <Button block bsStyle="default" onShowConnections={onConnect}>
+                <Button block bsStyle="default" onClick={onShowConnections}>
                     <Glyphicon glyph="list" />
                     <span> </span>
                     My Connections

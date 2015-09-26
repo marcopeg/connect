@@ -18,7 +18,6 @@ const viewMap = {
     connect: ConnectPage
 }
 
-import { changePage } from 'services/active-page-service';
 import { initFirebase } from 'services/firebase-service';
 
 @connect(s => s)
@@ -39,12 +38,6 @@ export class App extends React.Component {
                 </PageHeader>
 
                 <ActivePage />
-
-                <hr />
-                <button onClick={$=> this.props.dispatch(changePage('start'))}>start</button>
-                <button onClick={$=> this.props.dispatch(changePage('edit'))}>edit</button>
-                <button onClick={$=> this.props.dispatch(changePage('read'))}>read</button>
-                <button onClick={$=> this.props.dispatch(changePage('connect'))}>connect</button>
             </Grid>
         );
     }

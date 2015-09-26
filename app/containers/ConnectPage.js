@@ -2,18 +2,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
+import { ConnectionSearch } from 'components/ConnectionSearch';
+import { NoResults } from 'components/NoResults';
 
-@connect(s => s)
+import { startConnect } from 'services/firebase-service';
+
+const mapSteps = {
+    search: ConnectionSearch,
+    nores: NoResults
+};
+
+@connect(s => s.connect)
 export class ConnectPage extends React.Component {
 
+    componentWillMount() {
+        this.props.dispatch(startConnect());
+    }
+
     render() {
-        return (
-            <Grid>
-                <h1>connect page</h1>
-            </Grid>
-        );
+
+        var View = mapSteps[this.props.step];
+
+        if (View) {
+            return <View />;
+        } else {
+            return null;
+        }
     }
 }
