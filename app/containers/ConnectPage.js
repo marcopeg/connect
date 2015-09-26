@@ -28,7 +28,7 @@ export class ConnectPage extends React.Component {
     render() {
 
         var View = mapSteps[this.props.step];
-
+        
         if (View) {
             return <View {...this.props} onConnect={this.connect} />;
         } else {

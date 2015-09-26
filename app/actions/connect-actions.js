@@ -16,7 +16,10 @@ export function addProfile(profileId, data) {
         type: ADD_PROFILE,
         payload: {
             id: profileId,
-            name: data.name
+            name: data.name,
+            avatar: data.avatar,
+            twitter: data.twitter,
+            fbUrl: data.fbUrl
         }
     };
 }

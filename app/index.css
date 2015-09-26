@@ -3,6 +3,7 @@
 
 .single-connect__name {
     display: block;
+    padding-top: 20px;
     margin-bottom: 20px;
     font-weight: bold;
 }
