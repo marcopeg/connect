@@ -39,13 +39,7 @@ export function initFirebase() {
         });
 
         profileRef.child('connections').on('child_added', snap => {
-            fbProfiles.child(snap.key()).once('value', snap => {
-                dispatch(connections.addProfile(snap.key(), snap.val()));
-            });
-        });
-
-        profileRef.child('connections').on('child_changed', snap => {
-            fbProfiles.child(snap.key()).once('value', snap => {
+            fbProfiles.child(snap.key()).on('value', snap => {
                 dispatch(connections.addProfile(snap.key(), snap.val()));
             });
         });

@@ -20,6 +20,8 @@ export class ConnectionDetails extends React.Component {
             backgroundImage: ['url(', (avatar || johnDoe), ')'].join('')
         };
 
+        name = name || 'John Doe';
+
         return (
             <div className="connection-details text-center">
                 <img src={avatar || johnDoe} className="img-circle" width={160} height={160} />
