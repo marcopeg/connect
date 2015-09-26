@@ -19,12 +19,16 @@ export class ConnectPage extends React.Component {
         this.props.dispatch(startConnect());
     }
 
+    connect = (profile) => {
+        console.log(profile);
+    }
+
     render() {
 
         var View = mapSteps[this.props.step];
 
         if (View) {
-            return <View {...this.props} />;
+            return <View {...this.props} onConnect={this.connect} />;
         } else {
             return null;
         }

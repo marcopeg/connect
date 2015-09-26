@@ -47,7 +47,7 @@ export function updateProfile(data) {
 }
 
 export function startConnect() {
-    return dispatch => {
+    return (dispatch, getState) => {
         console.log('start connect process');
 
         /*
@@ -77,9 +77,12 @@ export function startConnect() {
 
         });
 
-        // setTimeout($=> dispatch(setStep('nores')), 1000);
-
-        // setTimeout($=> dispatch(changePage('start')), 2000);
+        setTimeout($=> {
+            if (getState().connect.profiles.length === 0) {
+                dispatch(setStep('nores'));
+                setTimeout($=> dispatch(changePage('start')), 3000);
+            }
+        }, 1000);
 
     };
 }

@@ -7,11 +7,12 @@ import { MultiConnect } from 'components/MultiConnect';
 export class ConnectionDiscovery extends React.Component {
 
     static defaultProps = {
-        profiles: []
+        profiles: [],
+        onConnect: $=> {}
     };
 
     render() {
-        var { profiles } = this.props;
+        var { profiles, onConnect } = this.props;
 
         console.log(profiles.length);
 
@@ -19,9 +20,9 @@ export class ConnectionDiscovery extends React.Component {
             case 0:
                 return <ConnectionSearch />;
             case 1:
-                return <SingleConnect {...profiles[0]} />;
+                return <SingleConnect {...profiles[0]} onConnect={$=> onConnect(profiles[0])} />;
             default:
-                return <MultiConnect items={profiles} />;
+                return <MultiConnect items={profiles} onConnect={onConnect} />;
         }
     }
 
