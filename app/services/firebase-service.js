@@ -64,33 +64,32 @@ export function startConnect() {
         var discoveryRef = fbDiscovery.child(profileId);
         discoveryRef.set(Date.now());
 
-        // search
-        fbDiscovery.on('child_added', snap => {
+        var onChildAdded = snap => {
             if (snap.key() !== profileId) {
                 fbProfiles.child(snap.key()).once('value', snap => {
                     dispatch(addProfile(snap.key(), snap.val()));
                 });
             }
-        });
+        };
 
-        // remove guys that timesout
-        fbDiscovery.on('child_removed', snap => {
+        var onChildRemoved = snap => {
             if (snap.key() !== profileId) {
                 dispatch(removeProfile(snap.key()));
             }
-        });
+        };
 
-        // detect no results
-        setTimeout($=> {
-            if (getState().connect.profiles.length === 0) {
-                dispatch(setStep('nores'));
-            }
-        }, 10000);
+        // search
+        fbDiscovery.on('child_added', onChildAdded);
 
+        // remove guys that timesout
+        fbDiscovery.on('child_removed', onChildRemoved);
+        
         // clean up
         setTimeout($=> {
             discoveryRef.remove();
-            
+            fbDiscovery.off('child_added', onChildAdded);
+            fbDiscovery.off('child_removed', onChildRemoved);
+
             dispatch(setStep('nores'));
             setTimeout($=> dispatch(changePage('start')), 1500);
         }, 10000);
