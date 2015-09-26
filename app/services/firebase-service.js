@@ -63,7 +63,7 @@ export function startConnect() {
         // expose myself for a while
         var discoveryRef = fbDiscovery.child(profileId);
         discoveryRef.set(Date.now());
-        setTimeout($=> discoveryRef.remove(), 1000);
+        setTimeout($=> discoveryRef.remove(), 10000);
 
         // search
         fbDiscovery.on('child_added', snap => {
