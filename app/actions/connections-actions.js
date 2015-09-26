@@ -10,6 +10,8 @@ export function addProfile(profileId, data) {
         payload: {
             name: data.name,
             twitter: data.twitter,
+            avatar: data.avatar,
+            fbUrl: data.fbUrl
         }
     };
 }

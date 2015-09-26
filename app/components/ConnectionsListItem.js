@@ -24,6 +24,8 @@ export class ConnectionsListItem extends React.Component {
             backgroundImage: ['url(', (avatar || johnDoe), ')'].join('')
         };
 
+        name = name || 'John Doe';
+
         return (
             <Grid fluid className="connections-list-item">
                 <Row onClick={onClick}>
