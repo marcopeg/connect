@@ -8,29 +8,39 @@ import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
-import { ConnectionDetails } from 'components/ConnectionDetails';
+import { ConnectionsList } from 'components/ConnectionsList';
 
 import { changePage } from 'services/active-page-service';
+import { setViewProfile } from 'actions/connections-actions';
 
 @connect(s => s.connections)
-export class ReadPage extends React.Component {
+export class ListPage extends React.Component {
     render() {
-        var { dispatch, items, viewProfile } = this.props;
-        var profile = items[viewProfile];
+
+        var connections = Object.keys(this.props.items).map(profileId => {
+            return {...this.props.items[profileId], id: profileId};
+        });
+
+        var { dispatch } = this.props;
 
         return (
             <Grid fluid>
                 <Row>
                     <Col xs={12}>
                         <h3>
-                            <Button bsStyle="primary" onClick={$=> dispatch(changePage('list'))}>
+                            <Button bsStyle="primary" onClick={$=> dispatch(changePage('start'))}>
                                 <Glyphicon glyph="chevron-left" />
                             </Button>
                             <span> </span>
-                            Read Profile
+                            MyConnections
                         </h3>
                         <hr />
-                        <ConnectionDetails {...profile} />
+                        <ConnectionsList 
+                            items={connections} 
+                            onSelect={profile => {
+                                dispatch(setViewProfile(profile.id));
+                                dispatch(changePage('view'));
+                            }} />
                     </Col>
                 </Row>
             </Grid>

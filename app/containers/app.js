@@ -8,13 +8,15 @@ import PageHeader from 'react-bootstrap/lib/PageHeader';
 
 import { StartPage } from 'containers/StartPage';
 import { EditPage } from 'containers/EditPage';
+import { ListPage } from 'containers/ListPage';
 import { ReadPage } from 'containers/ReadPage';
 import { ConnectPage } from 'containers/ConnectPage';
 
 const viewMap = {
     start: StartPage,
     edit: EditPage,
-    read: ReadPage,
+    list: ListPage,
+    view: ReadPage,
     connect: ConnectPage
 }
 

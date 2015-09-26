@@ -1,10 +1,12 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import Badge from 'react-bootstrap/lib/Badge';
 
 export class StartScreen extends React.Component {
 
     static defaultProps = {
+        count: 0,
         onConnect: null,
         onEditProfile: null,
         onShowConnections: null
@@ -12,7 +14,12 @@ export class StartScreen extends React.Component {
 
     render() {
 
-        var { onConnect, onEditProfile, onShowConnections } = this.props;
+        var { count, onConnect, onEditProfile, onShowConnections } = this.props;
+
+        var badge;
+        if (count > 0) {
+            badge = <Badge>{count}</Badge>
+        }
 
         return (
             <div>
@@ -26,7 +33,7 @@ export class StartScreen extends React.Component {
                 <Button block bsStyle="default" onClick={onShowConnections}>
                     <Glyphicon glyph="list" />
                     <span> </span>
-                    My Connections
+                    My Connections {badge}
                 </Button>
             </div>
         );

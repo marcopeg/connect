@@ -25,11 +25,13 @@ export class ConnectionDetails extends React.Component {
                 <img src={avatar || johnDoe} className="img-circle" width={160} height={160} />
                 <span className="connection-details__name">{name}</span>
                 <p className="connection-details__info">... other details ...</p>
+                {/*
                 <Button bsStyle="danger" onClick={onRemove}>
                     <Glyphicon glyph="trash" />
                     <span> </span>
                     Remove
                 </Button>
+                */}
             </div>
         );
     }
