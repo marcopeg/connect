@@ -1,7 +1,7 @@
 
 import Firebase from 'firebase';
 import { setProfile } from 'actions/profile-actions';
-import { setStep, addProfile, resetProfileList } from 'actions/connect-actions';
+import { setStep, addProfile, removeProfile, resetProfileList } from 'actions/connect-actions';
 import { changePage } from 'services/active-page-service';
 
 var fb;
@@ -42,8 +42,8 @@ export function initFirebase() {
         var tickRef = fb.child('tick');
 
         // start tick
-        setInterval($=> tickRef.transaction(val => (val || 0) + 1), 500);
-        tickRef.on('value', snap => tickValue = snap.val());
+        // setInterval($=> tickRef.transaction(val => (val || 0) + 1), 500);
+        // tickRef.on('value', snap => tickValue = snap.val());
 
     }
 }
@@ -56,47 +56,38 @@ export function updateProfile(data) {
 
 export function startConnect() {
     return (dispatch, getState) => {
-        console.log('start connect process');
 
         dispatch(setStep('search'));
         dispatch(resetProfileList());
 
-        // here there is subscriptions to be cleaned away!
-        // generateDiscoveryId().then(discoveryId => {
-        //     var discoveryRef = fbDiscovery.child(discoveryId);
-        //     discoveryRef.child('profiles/' + profileId).set(Date.now());
-
-        //     discoveryRef.child('profiles').on('child_added', snap => {
-        //         if (snap.key() !== profileId) {
-        //             fbProfiles.child(snap.key()).once('value', snap => {
-        //                 dispatch(addProfile(snap.key(), snap.val()));
-        //             });
-        //         }
-        //     });
-        // });
-
-        // // detect no results
-        // setTimeout($=> {
-        //     if (getState().connect.profiles.length === 0) {
-        //         dispatch(setStep('nores'));
-        //         setTimeout($=> dispatch(changePage('start')), 1500);
-        //     }
-        // }, 10000);
-    
-
         // expose myself for a while
-        var localTick = tickValue;
         var discoveryRef = fbDiscovery.child(profileId);
-        discoveryRef.set(tickValue);
-        setTimeout($=> discoveryRef.remove(), 5000);
+        discoveryRef.set(Date.now());
+        setTimeout($=> discoveryRef.remove(), 1000);
 
         // search
         fbDiscovery.on('child_added', snap => {
             if (snap.key() !== profileId) {
-                var diff = Math.abs(localTick - snap.val());
-                console.log(snap.key(), diff);
+                fbProfiles.child(snap.key()).once('value', snap => {
+                    dispatch(addProfile(snap.key(), snap.val()));
+                });
             }
         });
+
+        // remove guys that timesout
+        fbDiscovery.on('child_removed', snap => {
+            if (snap.key() !== profileId) {
+                dispatch(removeProfile(snap.key()));
+            }
+        });
+
+        // detect no results
+        setTimeout($=> {
+            if (getState().connect.profiles.length === 0) {
+                dispatch(setStep('nores'));
+                setTimeout($=> dispatch(changePage('start')), 1500);
+            }
+        }, 10000);
 
     };
 }

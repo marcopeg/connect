@@ -1,6 +1,7 @@
 
 export const SET_STEP = 'connect@step';
 export const ADD_PROFILE = 'connect@addProfile';
+export const REMOVE_PROFILE = 'connect@removeProfile';
 export const RESET_PROFILE_LIST = 'connect@resetList';
 
 export function setStep(value) {
@@ -17,6 +18,13 @@ export function addProfile(profileId, data) {
             id: profileId,
             name: data.name
         }
+    };
+}
+
+export function removeProfile(profileId) {
+    return {
+        type: REMOVE_PROFILE,
+        profileId
     };
 }
 
