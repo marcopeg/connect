@@ -14,6 +14,7 @@ import { ConnectionDetails } from 'components/ConnectionDetails';
 import { ConnectionConfirm } from 'components/ConnectionConfirm';
 import { ConnectionSearch } from 'components/ConnectionSearch';
 import { NoResults } from 'components/NoResults';
+import { DetailsForm } from 'components/DetailsForm';
 
 @connect(s => s)
 export class App extends React.Component {
@@ -41,6 +42,8 @@ export class App extends React.Component {
                 <ConnectionSearch />
                 <hr />
                 <NoResults />
+                <hr />
+                <DetailsForm name="Marco" twitter="thepeg" onChange={data => console.log(data)} />
             </Grid>
         );
     }
