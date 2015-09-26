@@ -78,6 +78,6 @@ export function startConnect() {
 
 function generateDiscoveryId() {
     return new Promise((resolve, reject) => {
-        resolve('foo');
+        resolve(Firebase.ServerValue.TIMESTAMP);
     });
 }
