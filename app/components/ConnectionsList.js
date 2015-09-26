@@ -1,5 +1,5 @@
 import React from 'react';
-import { MultiConnectItem } from 'components/MultiConnectItem';
+import { ConnectionsListItem } from 'components/ConnectionsListItem';
 
 const fixture = {
     items: [{
@@ -17,16 +17,16 @@ const fixture = {
     }]
 };
 
-export class MultiConnect extends React.Component {
+export class ConnectionsList extends React.Component {
 
     static defaultProps = {
         items: fixture.items,
-        onConnect: null
+        onSelect: null
     }
 
-    connect = item => {
-        if (this.props.onConnect) {
-            this.props.onConnect(item);
+    select = item => {
+        if (this.props.onSelect) {
+            this.props.onSelect(item);
         }
     }
 
@@ -34,7 +34,7 @@ export class MultiConnect extends React.Component {
 
         var items = this.props.items.map(item => (
             <li key={item.id}>
-                <MultiConnectItem {...item} onConnect={$=>this.connect(item)} />
+                <ConnectionsListItem {...item} onClick={$=>this.select(item)} />
                 <hr />
             </li>
         ));

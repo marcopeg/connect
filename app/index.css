@@ -12,15 +12,50 @@
 
 
 
-.multi-connect  {}
+.multi-connect-item  {}
 
-.multi-connect__name {
+.multi-connect-item__name {
     display: block;
     font-weight: bold;
     line-height: 60px;
 }
 
-.multi-connect__action {
+.multi-connect-item__action {
     text-align: right;
     padding-top: 20px;
+}
+
+
+
+
+
+
+.connections-list-item  {}
+
+.connections-list-item__name {
+    display: block;
+    font-weight: bold;
+    line-height: 60px;
+}
+
+.connections-list-item__action {
+    text-align: right;
+    padding-top: 20px;
+}
+
+
+
+
+
+.connection-details {}
+
+.connection-details__name {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.connection-details__info {
+    margin-bottom: 20px;
+    font-style: italic;
 }

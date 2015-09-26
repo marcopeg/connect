@@ -8,6 +8,8 @@ import PageHeader from 'react-bootstrap/lib/PageHeader';
 
 import { SingleConnect } from 'components/SingleConnect';
 import { MultiConnect } from 'components/MultiConnect';
+import { ConnectionsList } from 'components/ConnectionsList';
+import { ConnectionDetails } from 'components/ConnectionDetails';
 
 @connect(s => s)
 export class App extends React.Component {
@@ -20,8 +22,12 @@ export class App extends React.Component {
                 </PageHeader>
 
                 <SingleConnect onConnect={$=> alert('single connect')} />
+                <hr />
                 <MultiConnect onConnect={item => console.log(item)} />
-
+                <hr />
+                <ConnectionsList onSelect={item => console.log(item)} />
+                <hr />
+                <ConnectionDetails onRemove={$=> alert('remove connection')} />
             </Grid>
         );
     }
