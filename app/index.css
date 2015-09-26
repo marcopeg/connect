@@ -52,10 +52,13 @@
 .connection-details__name {
     display: block;
     margin-bottom: 20px;
+    margin-top: 20px;
     font-weight: bold;
 }
 
 .connection-details__info {
     margin-bottom: 20px;
     font-style: italic;
+    font-size: 2em;
+    font-weight: lighter;
 }
