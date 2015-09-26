@@ -6,6 +6,8 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 
+import { SingleConnect } from 'components/SingleConnect';
+
 @connect(s => s)
 export class App extends React.Component {
 
@@ -17,6 +19,9 @@ export class App extends React.Component {
                     <span> </span>
                     <button className="btn btn-primary">bump app</button>
                 </PageHeader>
+
+                <SingleConnect />
+                
             </Grid>
         );
     }
