@@ -6,44 +6,45 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 
-import { StartScreen } from 'components/StartScreen';
-import { SingleConnect } from 'components/SingleConnect';
-import { MultiConnect } from 'components/MultiConnect';
-import { ConnectionsList } from 'components/ConnectionsList';
-import { ConnectionDetails } from 'components/ConnectionDetails';
-import { ConnectionConfirm } from 'components/ConnectionConfirm';
-import { ConnectionSearch } from 'components/ConnectionSearch';
-import { NoResults } from 'components/NoResults';
-import { DetailsForm } from 'components/DetailsForm';
+import { StartPage } from 'containers/StartPage';
+import { EditPage } from 'containers/EditPage';
+import { ReadPage } from 'containers/ReadPage';
+import { ConnectPage } from 'containers/ConnectPage';
+
+const viewMap = {
+    start: StartPage,
+    edit: EditPage,
+    read: ReadPage,
+    connect: ConnectPage
+}
+
+import { changePage } from 'services/active-page-service';
+import { initFirebase } from 'services/firebase-service';
 
 @connect(s => s)
 export class App extends React.Component {
 
+    componentWillMount() {
+        this.props.dispatch(initFirebase());
+    }
+
     render() {
+
+        var ActivePage = viewMap[this.props.activePage];
+
         return (
             <Grid>
                 <PageHeader className="text-center">
                     ConnectApp
                 </PageHeader>
 
-                <StartScreen />
-                <hr />
+                <ActivePage />
 
-                <SingleConnect onConnect={$=> alert('single connect')} />
                 <hr />
-                <MultiConnect onConnect={item => console.log(item)} />
-                <hr />
-                <ConnectionsList onSelect={item => console.log(item)} />
-                <hr />
-                <ConnectionDetails onRemove={$=> alert('remove connection')} />
-                <hr />
-                <ConnectionConfirm />
-                <hr />
-                <ConnectionSearch />
-                <hr />
-                <NoResults />
-                <hr />
-                <DetailsForm name="Marco" twitter="thepeg" onChange={data => console.log(data)} />
+                <button onClick={$=> this.props.dispatch(changePage('start'))}>start</button>
+                <button onClick={$=> this.props.dispatch(changePage('edit'))}>edit</button>
+                <button onClick={$=> this.props.dispatch(changePage('read'))}>read</button>
+                <button onClick={$=> this.props.dispatch(changePage('connect'))}>connect</button>
             </Grid>
         );
     }
