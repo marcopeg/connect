@@ -2,13 +2,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { ConnectionSearch } from 'components/ConnectionSearch';
+import { ConnectionDiscovery } from 'components/ConnectionDiscovery';
 import { NoResults } from 'components/NoResults';
 
 import { startConnect } from 'services/firebase-service';
 
 const mapSteps = {
-    search: ConnectionSearch,
+    search: ConnectionDiscovery,
     nores: NoResults
 };
 
@@ -24,7 +24,7 @@ export class ConnectPage extends React.Component {
         var View = mapSteps[this.props.step];
 
         if (View) {
-            return <View />;
+            return <View {...this.props} />;
         } else {
             return null;
         }

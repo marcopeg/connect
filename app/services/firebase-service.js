@@ -1,7 +1,7 @@
 
 import Firebase from 'firebase';
 import { setProfile } from 'actions/profile-actions';
-import { setStep } from 'actions/connect-actions';
+import { setStep, addProfile } from 'actions/connect-actions';
 import { changePage } from 'services/active-page-service';
 
 var fb;
@@ -67,6 +67,14 @@ export function startConnect() {
             var discoveryRef = fbDiscovery.child(discoveryId);
             discoveryRef.child('profiles/' + profileId).set(Date.now());
 
+            discoveryRef.child('profiles').on('child_added', snap => {
+                if (snap.key() !== profileId) {
+                    fbProfiles.child(snap.key()).once('value', snap => {
+                        dispatch(addProfile(snap.key(), snap.val()));
+                    });
+                }
+            });
+
         });
 
         // setTimeout($=> dispatch(setStep('nores')), 1000);
@@ -78,6 +86,6 @@ export function startConnect() {
 
 function generateDiscoveryId() {
     return new Promise((resolve, reject) => {
-        resolve(Firebase.ServerValue.TIMESTAMP);
+        resolve('foo');
     });
 }
