@@ -50,7 +50,6 @@ export function initFirebase() {
         //     var facebookId = snap.val();
         // });
 
-
     }
 }
 
@@ -127,6 +126,7 @@ export function connectFacebook() {
                 fbLogins.child(authData.uid).set(profileId);
                 profileRef.child('logins/facebook').set(authData.uid);
                 profileRef.child('avatar').set(authData.facebook.profileImageURL);
+                profileRef.child('fbUrl').set(authData.facebook.cachedUserProfile.link);
 
                 profileRef.child('name').once('value', snap => {
                     if (!snap.val()) {

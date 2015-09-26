@@ -13,7 +13,7 @@ export class ConnectionDetails extends React.Component {
     }
 
     render() {
-
+        console.log(this.props);
         var { name, avatar, onRemove } = this.props;
 
         var avatarStyle = {
