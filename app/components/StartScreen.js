@@ -9,12 +9,13 @@ export class StartScreen extends React.Component {
         count: 0,
         onConnect: null,
         onEditProfile: null,
-        onShowConnections: null
+        onShowConnections: null,
+        onConnectFacebook: null
     }
 
     render() {
 
-        var { count, onConnect, onEditProfile, onShowConnections } = this.props;
+        var { count, onConnect, onEditProfile, onShowConnections, onConnectFacebook } = this.props;
 
         var badge;
         if (count > 0) {
@@ -35,6 +36,14 @@ export class StartScreen extends React.Component {
                     <span> </span>
                     My Connections {badge}
                 </Button>
+                <hr />
+                <div className="text-center">
+                    <Button bsStyle="success" onClick={onConnectFacebook}>
+                        <Glyphicon glyph="thumbs-up" />
+                        <span> </span>
+                        Connect Facebook
+                    </Button>
+                </div>
             </div>
         );
     }

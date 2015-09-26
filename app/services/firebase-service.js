@@ -8,6 +8,7 @@ import { changePage } from 'services/active-page-service';
 var fb;
 var fbProfiles;
 var fbDiscovery;
+var fbLogins;
 
 var profileRef;
 var profileId;
@@ -18,6 +19,7 @@ export function initFirebase() {
         fb = new Firebase('https://connectapp.firebaseio.com/');
         fbProfiles = fb.child('profile');
         fbDiscovery = fb.child('discovery');
+        fbLogins = fb.child('logins');
 
         profileId = localStorage.getItem('fb-profile-id');
         if (profileId) {
@@ -32,8 +34,8 @@ export function initFirebase() {
 
         profileRef.update({atime: Date.now()});
 
-        profileRef.on('value', snap => {
-            dispatch(setProfile(snap.val()))
+        profileRef.once('value', snap => {
+            dispatch(setProfile(snap.val()));
         });
 
         profileRef.child('connections').on('child_added', snap => {
@@ -41,6 +43,13 @@ export function initFirebase() {
                 dispatch(connections.addProfile(snap.key(), snap.val()));
             });
         });
+
+        // login validation
+        // if it fails we need to login again
+        // profileRef.child('logins/facebook').once('value', snap => {
+        //     var facebookId = snap.val();
+        // });
+
 
     }
 }
@@ -91,6 +100,8 @@ export function startConnect() {
             setTimeout($=> dispatch(changePage('start')), 1500);
         }, 10000);
 
+        
+
     };
 }
 
@@ -105,6 +116,20 @@ export function connectProfile(profile) {
         dispatch(setStep('confirm'));
         setTimeout($=> dispatch(changePage('start')), 1500);
     };
+}
+
+export function connectFacebook() {
+    return dispatch => {
+        fb.authWithOAuthPopup('facebook', function(error, authData) {
+            if (error) {
+                alert('login failed');
+            } else {
+                fbLogins.child(authData.uid).set(profileId);
+                profileRef.child('logins/facebook').set(authData.uid);
+                profileRef.child('avatar').set(authData.facebook.profileImageURL);
+            }
+        });
+    }
 }
 
 function generateDiscoveryId() {

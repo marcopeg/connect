@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { StartScreen } from 'components/StartScreen';
 import { changePage } from 'services/active-page-service';
+import { connectFacebook } from 'services/firebase-service';
 
 @connect(s => s)
 export class StartPage extends React.Component {
@@ -16,7 +17,8 @@ export class StartPage extends React.Component {
                 count={count}
                 onConnect={$=> dispatch(changePage('connect'))}
                 onEditProfile={$=> dispatch(changePage('edit'))} 
-                onShowConnections={$=> dispatch(changePage('list'))} />
+                onShowConnections={$=> dispatch(changePage('list'))} 
+                onConnectFacebook={$=> dispatch(connectFacebook())} />
         );
     }
 }
