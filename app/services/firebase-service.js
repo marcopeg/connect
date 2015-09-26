@@ -17,14 +17,16 @@ export function initFirebase() {
         if (profileId) {
             profileRef = fbProfiles.child(profileId);
         } else {
-            profileRef = fbProfiles.push();
+            profileRef = fbProfiles.push({
+                ctime: Date.now()
+            });
             profileId = profileRef.key();
             localStorage.setItem('fb-profile-id', profileId);
         }
 
-        profileRef.update({
-            atime: Date.now()
-        });
+        profileRef.update({atime: Date.now()});
+
+        
 
         console.log(profileId);
 
