@@ -1,15 +1,26 @@
 
 .single-connect {}
 
-.single-connect__avatar {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    background-size: contain;
-}
-
 .single-connect__name {
     display: block;
+    margin-bottom: 20px;
     font-weight: bold;
+}
+
+
+
+
+
+
+.multi-connect  {}
+
+.multi-connect__name {
+    display: block;
+    font-weight: bold;
+    line-height: 60px;
+}
+
+.multi-connect__action {
+    text-align: right;
+    padding-top: 20px;
 }
