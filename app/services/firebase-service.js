@@ -63,7 +63,6 @@ export function startConnect() {
         // expose myself for a while
         var discoveryRef = fbDiscovery.child(profileId);
         discoveryRef.set(Date.now());
-        setTimeout($=> discoveryRef.remove(), 10000);
 
         // search
         fbDiscovery.on('child_added', snap => {
@@ -85,8 +84,15 @@ export function startConnect() {
         setTimeout($=> {
             if (getState().connect.profiles.length === 0) {
                 dispatch(setStep('nores'));
-                setTimeout($=> dispatch(changePage('start')), 1500);
             }
+        }, 10000);
+
+        // clean up
+        setTimeout($=> {
+            discoveryRef.remove();
+            
+            dispatch(setStep('nores'));
+            setTimeout($=> dispatch(changePage('start')), 1500);
         }, 10000);
 
     };

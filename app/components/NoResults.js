@@ -8,7 +8,7 @@ export class NoResults extends React.Component {
         return (
             <Well className="text-center">
                 <h3>Sorry</h3>
-                <p>No Connections Found!</p>
+                <p>Timeout, try again!</p>
             </Well>
         );
     }
