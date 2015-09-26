@@ -11,7 +11,7 @@ export class StartPage extends React.Component {
 
     render() {
         var { dispatch, connections } = this.props;
-        var count = Object.keys(connections).length;
+        var count = Object.keys(connections.items).length;
         return (
             <StartScreen
                 count={count}
