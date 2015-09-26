@@ -25,15 +25,15 @@ export class ConnectionsListItem extends React.Component {
         };
 
         return (
-            <Grid fluid className="multi-connect">
+            <Grid fluid className="connections-list-item">
                 <Row onClick={onClick}>
                     <Col xs={3}>
                         <img src={avatar || johnDoe} className="img-circle" width={60} height={60} />
                     </Col>
-                    <Col xs={7} className="multi-connect__name">
+                    <Col xs={7} className="connections-list-item__name">
                         {name}
                     </Col>
-                    <Col xs={2} className="multi-connect__action text-right">
+                    <Col xs={2} className="connections-list-item__action text-right">
                         <Glyphicon glyph="chevron-right" />
                     </Col>
                 </Row>
