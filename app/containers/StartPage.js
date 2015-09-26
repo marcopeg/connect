@@ -9,11 +9,14 @@ import { changePage } from 'services/active-page-service';
 export class StartPage extends React.Component {
 
     render() {
-        var { dispatch } = this.props;
+        var { dispatch, connections } = this.props;
+        var count = Object.keys(connections).length;
         return (
-            <StartScreen 
+            <StartScreen
+                count={count}
                 onConnect={$=> dispatch(changePage('connect'))}
-                onEditProfile={$=> dispatch(changePage('edit'))} />
+                onEditProfile={$=> dispatch(changePage('edit'))} 
+                onShowConnections={$=> dispatch(changePage('list'))} />
         );
     }
 }
