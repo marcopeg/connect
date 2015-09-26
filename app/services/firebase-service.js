@@ -37,6 +37,13 @@ export function initFirebase() {
             dispatch(setProfile(snap.val()))
         });
 
+        var tickRef = fb.child('tick');
+
+        // start tick
+        setInterval($=> {
+            tickRef.transaction(val => (val || 0) + 1);
+        }, 500);
+
     }
 }
 
