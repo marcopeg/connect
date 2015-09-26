@@ -2,6 +2,7 @@
 import Firebase from 'firebase';
 import { setProfile } from 'actions/profile-actions';
 import { setStep, addProfile, removeProfile, resetProfileList } from 'actions/connect-actions';
+import * as connections from 'actions/connections-actions';
 import { changePage } from 'services/active-page-service';
 
 var fb;
@@ -10,9 +11,6 @@ var fbDiscovery;
 
 var profileRef;
 var profileId;
-
-var tickValue;
-
 
 export function initFirebase() {
     return dispatch => {
@@ -34,16 +32,15 @@ export function initFirebase() {
 
         profileRef.update({atime: Date.now()});
 
-
         profileRef.on('value', snap => {
             dispatch(setProfile(snap.val()))
         });
 
-        var tickRef = fb.child('tick');
-
-        // start tick
-        // setInterval($=> tickRef.transaction(val => (val || 0) + 1), 500);
-        // tickRef.on('value', snap => tickValue = snap.val());
+        profileRef.child('connections').on('child_added', snap => {
+            fbProfiles.child(snap.key()).once('value', snap => {
+                dispatch(connections.addProfile(snap.key(), snap.val()));
+            });
+        });
 
     }
 }
