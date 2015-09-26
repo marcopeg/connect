@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 
 import { ConnectionDiscovery } from 'components/ConnectionDiscovery';
 import { NoResults } from 'components/NoResults';
+import { ConnectionConfirm } from 'components/ConnectionConfirm';
 
-import { startConnect } from 'services/firebase-service';
+import { startConnect, connectProfile } from 'services/firebase-service';
 
 const mapSteps = {
     search: ConnectionDiscovery,
-    nores: NoResults
+    nores: NoResults,
+    confirm: ConnectionConfirm
 };
 
 @connect(s => s.connect)
@@ -20,7 +22,7 @@ export class ConnectPage extends React.Component {
     }
 
     connect = (profile) => {
-        console.log(profile);
+        this.props.dispatch(connectProfile(profile));
     }
 
     render() {

@@ -13,9 +13,6 @@ export class ConnectionDiscovery extends React.Component {
 
     render() {
         var { profiles, onConnect } = this.props;
-
-        console.log(profiles.length);
-
         switch (profiles.length) {
             case 0:
                 return <ConnectionSearch />;

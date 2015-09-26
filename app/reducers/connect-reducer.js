@@ -1,5 +1,5 @@
 
-import { SET_STEP, ADD_PROFILE } from 'actions/connect-actions';
+import { SET_STEP, ADD_PROFILE, RESET_PROFILE_LIST } from 'actions/connect-actions';
 
 const initialState = {
     step: null,
@@ -15,6 +15,10 @@ export function connectReducer(state = initialState, action) {
         case ADD_PROFILE:
             return { ...state,
                 profiles: [...state.profiles, action.payload]
+            };
+        case RESET_PROFILE_LIST:
+            return { ...state,
+                profiles: []   
             };
         default:
             return state;

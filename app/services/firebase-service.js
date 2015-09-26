@@ -1,7 +1,7 @@
 
 import Firebase from 'firebase';
 import { setProfile } from 'actions/profile-actions';
-import { setStep, addProfile } from 'actions/connect-actions';
+import { setStep, addProfile, resetProfileList } from 'actions/connect-actions';
 import { changePage } from 'services/active-page-service';
 
 var fb;
@@ -50,20 +50,11 @@ export function startConnect() {
     return (dispatch, getState) => {
         console.log('start connect process');
 
-        /*
-        0. set inner state to "searching"
-        1. generate id
-        2. push id to discovery mode
-        3. listen disovery for other guys (collect ids)
-        4. timeout 10 seconds discovery
-        5. change inner state to "list"
-        6. 
-        */
-
         dispatch(setStep('search'));
+        dispatch(resetProfileList());
 
+        // here there is subscriptions to be cleaned away!
         generateDiscoveryId().then(discoveryId => {
-            
             var discoveryRef = fbDiscovery.child(discoveryId);
             discoveryRef.child('profiles/' + profileId).set(Date.now());
 
@@ -74,16 +65,29 @@ export function startConnect() {
                     });
                 }
             });
-
         });
 
+        // detect no results
         setTimeout($=> {
             if (getState().connect.profiles.length === 0) {
                 dispatch(setStep('nores'));
-                setTimeout($=> dispatch(changePage('start')), 3000);
+                setTimeout($=> dispatch(changePage('start')), 1500);
             }
-        }, 1000);
+        }, 10000);
 
+    };
+}
+
+export function connectProfile(profile) {
+    return dispatch => {
+        profileRef.child('connections/' + profile.id).set({
+            time: Date.now(),
+            where: 'loc!'   
+        });
+
+        // show confirm
+        dispatch(setStep('confirm'));
+        setTimeout($=> dispatch(changePage('start')), 1500);
     };
 }
 
