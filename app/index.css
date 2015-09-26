@@ -1,0 +1,15 @@
+
+.single-connect {}
+
+.single-connect__avatar {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    background-size: contain;
+}
+
+.single-connect__name {
+    display: block;
+    font-weight: bold;
+}

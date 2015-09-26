@@ -44,6 +44,7 @@ module.exports = {
             { test: /\.woff$/, loader: "file-loader" },
             { test: /\.ttf$/, loader: "file-loader" },
             { test: /\.svg$/, loader: "file-loader" },
+            { test: /\.png$/, loader: "url-loader?mimetype=image/png" }
         ]
     }
 };

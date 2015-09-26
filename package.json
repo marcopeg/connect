@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start" : "node server.js",
+    "start": "node server.js",
     "test": "karma start"
   },
   "author": "",
@@ -25,6 +25,7 @@
     "redux-devtools-diff-monitor": "^0.2.2",
     "redux-slider-monitor": "^0.5.0",
     "redux-thunk": "^0.1.0",
+    "url-loader": "^0.5.6",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.10.1"
   },

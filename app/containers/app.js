@@ -14,14 +14,12 @@ export class App extends React.Component {
     render() {
         return (
             <Grid>
-                <PageHeader>
-                    Foo
-                    <span> </span>
-                    <button className="btn btn-primary">bump app</button>
+                <PageHeader className="text-center">
+                    ConnectApp
                 </PageHeader>
 
                 <SingleConnect />
-                
+
             </Grid>
         );
     }
