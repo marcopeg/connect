@@ -34,7 +34,7 @@ export function initFirebase() {
 
         profileRef.update({atime: Date.now()});
 
-        profileRef.once('value', snap => {
+        profileRef.on('value', snap => {
             dispatch(setProfile(snap.val()));
         });
 
@@ -127,6 +127,13 @@ export function connectFacebook() {
                 fbLogins.child(authData.uid).set(profileId);
                 profileRef.child('logins/facebook').set(authData.uid);
                 profileRef.child('avatar').set(authData.facebook.profileImageURL);
+
+                profileRef.child('name').once('value', snap => {
+                    if (!snap.val()) {
+                        console.log(authData.facebook.displayName);
+                        profileRef.child('name').set(authData.facebook.displayName);
+                    }
+                });
             }
         });
     }
