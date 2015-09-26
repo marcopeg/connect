@@ -2,18 +2,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
+import { DetailsForm } from 'components/DetailsForm';
+
+import { updateProfile } from 'services/firebase-service';
 
 @connect(s => s)
 export class EditPage extends React.Component {
 
     render() {
+
+        var { profile, dispatch } = this.props;
+
         return (
-            <Grid>
-                <h1>me page</h1>
-            </Grid>
+            <div>
+                <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
+            </div>
         );
     }
 }

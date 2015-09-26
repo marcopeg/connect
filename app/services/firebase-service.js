@@ -1,5 +1,6 @@
 
 import Firebase from 'firebase';
+import { setProfile } from 'actions/profile-actions';
 
 var fb;
 var fbProfiles;
@@ -26,9 +27,20 @@ export function initFirebase() {
 
         profileRef.update({atime: Date.now()});
 
+
+        profileRef.on('value', snap => {
+            dispatch(setProfile(snap.val()))
+        });
+
         
 
         console.log(profileId);
 
     }
+}
+
+export function updateProfile(data) {
+    return dispatch => {
+        profileRef.update(data);
+    };
 }
