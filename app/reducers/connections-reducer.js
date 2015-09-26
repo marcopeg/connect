@@ -12,6 +12,7 @@ export function connectionsReducer(state = initialValue, action) {
             var items = { ...state.items };
             items[action.profileId] = action.payload;
             return {...state, items: items};
+
         // case REMOVE_PROFILE:
         //     var nextState = { ...state };
         //     delete(nextState.items[action.profileId]);

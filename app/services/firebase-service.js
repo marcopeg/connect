@@ -44,6 +44,12 @@ export function initFirebase() {
             });
         });
 
+        profileRef.child('connections').on('child_changed', snap => {
+            fbProfiles.child(snap.key()).once('value', snap => {
+                dispatch(connections.addProfile(snap.key(), snap.val()));
+            });
+        });
+
         // login validation
         // if it fails we need to login again
         // profileRef.child('logins/facebook').once('value', snap => {
