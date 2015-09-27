@@ -3,6 +3,7 @@ import Firebase from 'firebase';
 import { setProfile } from 'actions/profile-actions';
 import { setStep, addProfile, removeProfile, resetProfileList } from 'actions/connect-actions';
 import * as connections from 'actions/connections-actions';
+import * as generalActions from 'actions/general-actions';
 import { changePage } from 'services/active-page-service';
 import { onboardingIsDone } from 'services/general-service';
 
@@ -21,6 +22,13 @@ export function initFirebase() {
         fbProfiles = fb.child('profile');
         fbDiscovery = fb.child('discovery');
         fbLogins = fb.child('logins');
+
+        // check connectivity status
+        setTimeout($=> {
+            fb.child('.info/connected').on('value', snap => {
+                dispatch(generalActions.setFirebaseStatus(snap.val() === true));
+            });
+        }, 1000);
 
         profileId = localStorage.getItem('fb-profile-id');
         if (profileId) {
@@ -64,9 +72,13 @@ export function initFirebase() {
 
 export function updateProfile(data) {
     return dispatch => {
-        profileRef.update(data);
-        if (data.name || data.twitter) {
-            dispatch(onboardingIsDone());
+        try {
+            profileRef.update(data);
+            if (data.name || data.twitter) {
+                dispatch(onboardingIsDone());
+            }
+        } catch(e) {
+            alert('could not save right now,\nplease take a deep breath and try again!');
         }
     };
 }

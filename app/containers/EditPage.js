@@ -20,7 +20,7 @@ export class EditPage extends React.Component {
         var importProfile;
         if (true) {
             importProfile = (
-                <Button bsStyle="default" onClick={$=> dispatch(connectFacebook())}>
+                <Button bsStyle="primary" onClick={$=> dispatch(connectFacebook())}>
                     <Glyphicon glyph="download" />
                     <span> </span>
                     import your Facebook profile!
@@ -28,7 +28,7 @@ export class EditPage extends React.Component {
             );
         }
 
-        var onboarding, pageTitle, importBelow;
+        var onboarding, pageTitle, importBelow, saveBtn;
         if (!this.props.general.onboardingIsDone) {
             onboarding = (
                 <div>
@@ -41,6 +41,11 @@ export class EditPage extends React.Component {
                     {importProfile}
                     <hr />
                 </div>
+            );
+            saveBtn = (
+                <Button block bsStyle="success" onClick={$=> dispatch(changePage('start'))}>
+                    <Glyphicon glyph="ok" /> I'm quite done!
+                </Button>
             );
         } else {
             pageTitle = (
@@ -70,6 +75,7 @@ export class EditPage extends React.Component {
                 {onboarding}
                 <p style={{marginTop:5,fontSize:10}}><i>(Everything save as soon as you type)</i></p>
                 <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
+                {saveBtn}
                 {importBelow}
             </Grid>
         );

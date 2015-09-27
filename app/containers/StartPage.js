@@ -8,6 +8,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Label from 'react-bootstrap/lib/Label';
 
 import { StartScreen } from 'components/StartScreen';
+import { Info } from 'components/Info';
 import { changePage } from 'services/active-page-service';
 import { connectFacebook } from 'services/firebase-service';
 
@@ -45,20 +46,7 @@ export class StartPage extends React.Component {
                 <hr />
                 <div className="text-center">
                     <p><b>!!! Attention !!!</b></p>
-                    <p className="lead">
-                        <i>
-                            This app was hacked in few hours after party the whole night
-                            at <b>JSConf15</b>.
-                        </i>
-                        <br /><br />
-                        Please <b>forgive the authors</b> if it <br />
-                        doesn't work properly: <Label bsStyle="warning">It works on my machine!</Label>
-                    </p>
-                    <p className="lead">
-                        <a href="http://twitter.com/thepeg" target="_blank">@thepeg</a>
-                        <span> - </span>
-                        <a href="http://twitter.com/fifiolka" target="_blank">@fifiolka</a>
-                    </p>
+                    <Info />
                 </div>
             </Grid>
         );
