@@ -51,13 +51,13 @@ export class StartPage extends React.Component {
                             at <b>JSConf15</b>.
                         </i>
                         <br /><br />
-                        Please <b>forgive the author</b> 
-                        if it doesn't work properly: <Label bsStyle="warning">It works on my machine!</Label>
+                        Please <b>forgive the authors</b> if it <br />
+                        doesn't work properly: <Label bsStyle="warning">It works on my machine!</Label>
                     </p>
                     <p className="lead">
                         <a href="http://twitter.com/thepeg" target="_blank">@thepeg</a>
                         <span> - </span>
-                        <a href="http://twitter.com/fiolkaf" target="_blank">@fiolkaf</a>
+                        <a href="http://twitter.com/fifiolka" target="_blank">@fifiolka</a>
                     </p>
                 </div>
             </Grid>
