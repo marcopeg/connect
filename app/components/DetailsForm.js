@@ -17,7 +17,8 @@ export class DetailsForm extends React.Component {
         email: '',
         phone: '',
         avatar: '',
-        facebook: ''
+        facebook: '',
+        notes: ''
     }
 
     componentWillMount() {
@@ -27,7 +28,8 @@ export class DetailsForm extends React.Component {
             email: this.props.email,
             phone: this.props.phone,
             avatar: this.props.avatar,
-            facebook: this.props.facebook
+            facebook: this.props.facebook,
+            notes: this.props.notes
         });
     }
 
@@ -63,7 +65,7 @@ export class DetailsForm extends React.Component {
 
     render() {
 
-        var { name, twitter, email, phone, avatar, facebook } = this.state;
+        var { name, twitter, email, phone, avatar, facebook, notes } = this.state;
 
         return (
             <div>
@@ -107,6 +109,13 @@ export class DetailsForm extends React.Component {
                     addonBefore={<Glyphicon glyph="user" />}
                     value={facebook} 
                     onChange={this.onChange('facebook')}/>
+
+                <Input 
+                    type="textarea" 
+                    placeholder="notes"
+                    addonBefore={<Glyphicon glyph="pencil" />}
+                    value={notes} 
+                    onChange={this.onChange('notes')}/>
             </div>
         );
     }

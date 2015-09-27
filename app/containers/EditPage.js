@@ -18,9 +18,9 @@ export class EditPage extends React.Component {
         var { profile, dispatch } = this.props;
 
         var importProfile;
-        if (false) {
+        if (true) {
             importProfile = (
-                <Button bsStyle="primary" onClick={$=> dispatch(connectFacebook())}>
+                <Button block bsStyle="primary" onClick={$=> dispatch(connectFacebook())}>
                     <Glyphicon glyph="download" />
                     <span> </span>
                     import your Facebook profile!

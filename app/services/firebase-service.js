@@ -43,9 +43,12 @@ export function initFirebase() {
 
         profileRef.update({atime: Date.now()});
 
-        profileRef.on('value', snap => {
-            dispatch(setProfile(snap.val()));
-        });
+        // load profile from local storage and try to update
+        try {
+            var profile = JSON.parse(localStorage.getItem('profile'));
+            dispatch(setProfile(profile));
+            try { profileRef.update(data); } catch(e) {}
+        } catch(e) {}
 
         profileRef.child('connections').on('child_added', snap => {
             fbProfiles.child(snap.key()).on('value', snap => {
@@ -53,33 +56,18 @@ export function initFirebase() {
             });
         });
 
-        // login validation
-        // if it fails we need to login again
-        // profileRef.child('logins/facebook').once('value', snap => {
-        //     var facebookId = snap.val();
-        // });
-        
-        // move automatically to edit after login
-        profileRef.child('name').once('value', snap => {
-            var val = snap.val();
-            if (!val) {
-                dispatch(changePage('edit'));
-            }
-        });
-
     }
 }
 
+// dump to localstorage and lazily try to update remote data
 export function updateProfile(data) {
     return dispatch => {
-        try {
-            profileRef.update(data);
-            if (data.name || data.twitter) {
-                dispatch(onboardingIsDone());
-            }
-        } catch(e) {
-            alert('could not save right now,\nplease take a deep breath and try again!');
+        localStorage.setItem('profile', JSON.stringify(data));
+        dispatch(setProfile(data));
+        if (data.name || data.twitter) {
+            dispatch(onboardingIsDone());
         }
+        try { profileRef.update(data); } catch(e) {}
     };
 }
 
@@ -141,6 +129,8 @@ export function connectProfile(profile) {
     };
 }
 
+
+// horrible dumping into the localstorage
 export function connectFacebook() {
     return dispatch => {
         fb.authWithOAuthPopup('facebook', function(error, authData) {
@@ -150,23 +140,29 @@ export function connectFacebook() {
                 fbLogins.child(authData.uid).set(profileId);
                 profileRef.child('logins/facebook').set(authData.uid);
 
-                profileRef.child('name').once('value', snap => {
-                    if (!snap.val()) {
-                        profileRef.child('name').set(authData.facebook.displayName);
-                    }
-                });
+                var profile;
+                try {
+                    var profile = JSON.parse(localStorage.getItem('profile'));                
+                } catch(e) {}
 
-                profileRef.child('avatar').once('value', snap => {
-                    if (!snap.val()) {
-                        profileRef.child('avatar').set(authData.facebook.profileImageURL);
-                    }
-                });
+                profile = profile || {};
 
-                profileRef.child('facebook').once('value', snap => {
-                    if (!snap.val()) {
-                        profileRef.child('facebook').set(authData.facebook.id);
+                try {
+                    if (!profile.name) {
+                        profile.name = authData.facebook.displayName;
                     }
-                });
+                    if (!profile.avatar) {
+                        profile.avatar = authData.facebook.profileImageURL;
+                    }
+                    if (!profile.facebook) {
+                        profile.facebook = authData.facebook.id;
+                    }
+
+                    dispatch(setProfile(profile));
+                    try { profileRef.update(data); } catch(e) {}
+                } catch(e) {
+                    console.log('ERROR', e);
+                }
 
                 dispatch(onboardingIsDone());
             }

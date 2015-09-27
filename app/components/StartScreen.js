@@ -37,7 +37,7 @@ export class StartScreen extends React.Component {
                     <Button bsStyle="default" onClick={onEditProfile}>
                         <Glyphicon glyph="user" />
                         <span> </span>
-                        Me
+                        Edit my profile
                     </Button>
                     <Button bsStyle="default" onClick={onShowConnections}>
                         <Glyphicon glyph="list" />

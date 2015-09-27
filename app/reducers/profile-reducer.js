@@ -9,7 +9,8 @@ const initialState = {
     email: '',
     phone: '',
     skype: '',
-    facebook: ''
+    facebook: '',
+    notes: ''
 }
 
 export function profileReducer(state = initialState, action) {
@@ -22,7 +23,8 @@ export function profileReducer(state = initialState, action) {
                 facebook: action.facebook,
                 email: action.email,
                 phone: action.phone,
-                skype: action.skype
+                skype: action.skype,
+                notes: action.notes
             };
         default:
             return state;

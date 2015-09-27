@@ -10,6 +10,7 @@ export function setProfile(data) {
         phone: data.phone,
         skype: data.skype,
         avatar: data.avatar,
-        facebook: data.facebook
+        facebook: data.facebook,
+        notes: data.notes
     };
 }
