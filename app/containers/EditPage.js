@@ -18,7 +18,7 @@ export class EditPage extends React.Component {
         var { profile, dispatch } = this.props;
 
         var importProfile;
-        if (true) {
+        if (false) {
             importProfile = (
                 <Button bsStyle="primary" onClick={$=> dispatch(connectFacebook())}>
                     <Glyphicon glyph="download" />
@@ -42,11 +42,6 @@ export class EditPage extends React.Component {
                     <hr />
                 </div>
             );
-            saveBtn = (
-                <Button block bsStyle="success" onClick={$=> dispatch(changePage('start'))}>
-                    <Glyphicon glyph="ok" /> I'm quite done!
-                </Button>
-            );
         } else {
             pageTitle = (
                 <div>
@@ -68,6 +63,12 @@ export class EditPage extends React.Component {
                 </div>
             );
         }
+
+        saveBtn = (
+            <Button block bsStyle="success" onClick={$=> dispatch(changePage('start'))}>
+                <Glyphicon glyph="ok" /> I'm quite done!
+            </Button>
+        );
 
         return (
             <Grid>
