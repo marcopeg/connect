@@ -44,11 +44,33 @@ export function initFirebase() {
         profileRef.update({atime: Date.now()});
 
         // load profile from local storage and try to update
+        var profile;
         try {
             var profile = JSON.parse(localStorage.getItem('profile'));
+        } catch(e) {}
+
+        // fetch local profile or try to rebuild from remote
+        if (profile) {
             dispatch(setProfile(profile));
             try { profileRef.update(data); } catch(e) {}
-        } catch(e) {}
+        } else {
+            profileRef.once('value', snap => {
+                var rp = snap.val();
+                profile = {
+                    name: rp.name || '',
+                    twitter: rp.twitter || '',
+                    email: rp.email || '',
+                    phone: rp.phone || '',
+                    skype: rp.skype || '',
+                    avatar: rp.avatar || '',
+                    facebook: rp.facebook || '',
+                    notes: rp.notes || ''
+                };
+                dispatch(setProfile(profile));
+                localStorage.setItem('profile', JSON.stringify(profile));
+                console.log('rebuild from remote', snap.val());
+            });
+        }
 
         profileRef.child('connections').on('child_added', snap => {
             fbProfiles.child(snap.key()).on('value', snap => {
