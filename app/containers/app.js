@@ -13,6 +13,8 @@ import { ReadPage } from 'containers/ReadPage';
 import { ConnectPage } from 'containers/ConnectPage';
 
 import { changePage } from 'services/active-page-service';
+import { initFirebase } from 'services/firebase-service';
+import { initGeneralService } from 'services/general-service';
 
 const viewMap = {
     start: StartPage,
@@ -22,13 +24,12 @@ const viewMap = {
     connect: ConnectPage
 }
 
-import { initFirebase } from 'services/firebase-service';
-
 @connect(s => s)
 export class App extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(initFirebase());
+        this.props.dispatch(initGeneralService());
     }
 
     render() {

@@ -4,6 +4,7 @@ import { setProfile } from 'actions/profile-actions';
 import { setStep, addProfile, removeProfile, resetProfileList } from 'actions/connect-actions';
 import * as connections from 'actions/connections-actions';
 import { changePage } from 'services/active-page-service';
+import { onboardingIsDone } from 'services/general-service';
 
 var fb;
 var fbProfiles;
@@ -64,6 +65,9 @@ export function initFirebase() {
 export function updateProfile(data) {
     return dispatch => {
         profileRef.update(data);
+        if (data.name || data.twitter) {
+            dispatch(onboardingIsDone());
+        }
     };
 }
 
@@ -151,6 +155,8 @@ export function connectFacebook() {
                         profileRef.child('facebook').set(authData.facebook.id);
                     }
                 });
+
+                dispatch(onboardingIsDone());
             }
         });
     }

@@ -17,6 +17,33 @@ export class EditPage extends React.Component {
 
         var { profile, dispatch } = this.props;
 
+        var importProfile;
+        if (true) {
+            importProfile = (
+                <Button bsStyle="default" onClick={$=> dispatch(connectFacebook())}>
+                    <Glyphicon glyph="download" />
+                    <span> </span>
+                    import your Facebook profile!
+                </Button>
+            );
+        }
+
+        var onboarding;
+        if (!this.props.general.onboardingIsDone) {
+            onboarding = (
+                <div>
+                    <h4>Welcome aboard!</h4>
+                    <p>
+                        <i>ConnectAPP</i> is the fastest way to link with other people but
+                        I need you to <b>fill up some minimal info</b> before to go.
+                    </p>
+
+                    {importProfile}
+                    <hr />
+                </div>
+            );
+        }
+
         return (
             <Grid>
                 <h4 style={{margin:0}}>
@@ -28,14 +55,11 @@ export class EditPage extends React.Component {
                     </span>
                 </h4>
                 <hr />
+                {onboarding}
                 <p style={{marginTop:5,fontSize:10}}><i>(Everything save as soon as you type)</i></p>
                 <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
                 <hr />
-                <Button bsStyle="default" onClick={$=> dispatch(connectFacebook())}>
-                    <Glyphicon glyph="thumbs-up" />
-                    <span> </span>
-                    link to Facebook
-                </Button>
+                {importProfile}
             </Grid>
         );
     }
