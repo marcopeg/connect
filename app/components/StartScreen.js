@@ -51,7 +51,7 @@ export class StartScreen extends React.Component {
                     <Button bsStyle="default" onClick={onConnectFacebook}>
                         <Glyphicon glyph="thumbs-up" />
                         <span> </span>
-                        Connect Facebook
+                        link to Facebook
                     </Button>
                 </div>
             </div>
