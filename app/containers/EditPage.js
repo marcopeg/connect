@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Grid from 'react-bootstrap/lib/Grid';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import { DetailsForm } from 'components/DetailsForm';
@@ -17,7 +18,7 @@ export class EditPage extends React.Component {
         var { profile, dispatch } = this.props;
 
         return (
-            <div>
+            <Grid>
                 <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
                 <hr />
                 <div className="text-right">
@@ -27,7 +28,7 @@ export class EditPage extends React.Component {
                         <Glyphicon glyph="ok" />
                     </Button>
                 </div>
-            </div>
+            </Grid>
         );
     }
 }

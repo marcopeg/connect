@@ -27,13 +27,14 @@ export class ListPage extends React.Component {
             <Grid fluid>
                 <Row>
                     <Col xs={12}>
-                        <h3>
+                        <h4 style={{margin:0}}>
                             <Button bsStyle="primary" onClick={$=> dispatch(changePage('start'))}>
                                 <Glyphicon glyph="chevron-left" />
                             </Button>
-                            <span> </span>
-                            MyConnections
-                        </h3>
+                            <span style={{display:'inline-block',marginLeft:20}}>
+                                MyConnections
+                            </span>
+                        </h4>
                         <hr />
                         <ConnectionsList 
                             items={connections} 

@@ -1,4 +1,6 @@
 import React from 'react';
+
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Badge from 'react-bootstrap/lib/Badge';
@@ -24,21 +26,29 @@ export class StartScreen extends React.Component {
 
         return (
             <div>
-                <Button block bsStyle="primary" onClick={onConnect}>Connect!</Button>
+                <Button block bsStyle="success" bsSize="large" onClick={onConnect}>
+                    <Glyphicon glyph="magnet" /><span> </span>
+                    Connect Now
+                </Button>
                 <hr />
-                <Button block bsStyle="default" onClick={onEditProfile}>
-                    <Glyphicon glyph="user" />
-                    <span> </span>
-                    Me
-                </Button>
-                <Button block bsStyle="default" onClick={onShowConnections}>
-                    <Glyphicon glyph="list" />
-                    <span> </span>
-                    My Connections {badge}
-                </Button>
+
+                
+                <ButtonGroup vertical block>
+                    <Button bsStyle="default" onClick={onEditProfile}>
+                        <Glyphicon glyph="user" />
+                        <span> </span>
+                        Me
+                    </Button>
+                    <Button bsStyle="default" onClick={onShowConnections}>
+                        <Glyphicon glyph="list" />
+                        <span> </span>
+                        My Connections {badge}
+                    </Button>
+                </ButtonGroup>
+                
                 <hr />
                 <div className="text-center">
-                    <Button bsStyle="success" onClick={onConnectFacebook}>
+                    <Button bsStyle="default" onClick={onConnectFacebook}>
                         <Glyphicon glyph="thumbs-up" />
                         <span> </span>
                         Connect Facebook

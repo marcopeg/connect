@@ -22,13 +22,14 @@ export class ReadPage extends React.Component {
             <Grid fluid>
                 <Row>
                     <Col xs={12}>
-                        <h3>
+                        <h4 style={{margin:0}}>
                             <Button bsStyle="primary" onClick={$=> dispatch(changePage('list'))}>
                                 <Glyphicon glyph="chevron-left" />
                             </Button>
-                            <span> </span>
-                            Read Profile
-                        </h3>
+                            <span style={{display:'inline-block',marginLeft:20}}>
+                                {profile.name || profile.twitter || 'John Doe'}
+                            </span>
+                        </h4>
                         <hr />
                         <ConnectionDetails {...profile} />
                     </Col>
