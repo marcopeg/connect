@@ -31,6 +31,18 @@ export class DetailsForm extends React.Component {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.facebook && !this.state.facebook) {
+            this.setState({facebook: nextProps.facebook});
+        }
+        if (nextProps.avatar && !this.state.avatar) {
+            this.setState({avatar: nextProps.avatar});
+        }
+        if (nextProps.name && !this.state.name) {
+            this.setState({name: nextProps.name});
+        }
+    }
+
     onChange = propName => {
         return e => {
             var payload = {};

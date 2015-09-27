@@ -25,7 +25,7 @@ export class StartScreen extends React.Component {
         }
 
         return (
-            <div>
+            <div style={{marginBottom:100}}>
                 <Button block bsStyle="success" bsSize="large" onClick={onConnect}>
                     <Glyphicon glyph="magnet" /><span> </span>
                     Connect Now
@@ -45,15 +45,6 @@ export class StartScreen extends React.Component {
                         My Connections {badge}
                     </Button>
                 </ButtonGroup>
-                
-                <hr />
-                <div className="text-center">
-                    <Button bsStyle="default" onClick={onConnectFacebook}>
-                        <Glyphicon glyph="thumbs-up" />
-                        <span> </span>
-                        link to Facebook
-                    </Button>
-                </div>
             </div>
         );
     }

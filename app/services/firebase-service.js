@@ -133,13 +133,22 @@ export function connectFacebook() {
             } else {
                 fbLogins.child(authData.uid).set(profileId);
                 profileRef.child('logins/facebook').set(authData.uid);
-                profileRef.child('avatar').set(authData.facebook.profileImageURL);
-                profileRef.child('fbUrl').set(authData.facebook.cachedUserProfile.link);
 
                 profileRef.child('name').once('value', snap => {
                     if (!snap.val()) {
-                        console.log(authData.facebook.displayName);
                         profileRef.child('name').set(authData.facebook.displayName);
+                    }
+                });
+
+                profileRef.child('avatar').once('value', snap => {
+                    if (!snap.val()) {
+                        profileRef.child('avatar').set(authData.facebook.profileImageURL);
+                    }
+                });
+
+                profileRef.child('facebook').once('value', snap => {
+                    if (!snap.val()) {
+                        profileRef.child('facebook').set(authData.facebook.id);
                     }
                 });
             }

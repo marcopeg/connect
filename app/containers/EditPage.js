@@ -8,7 +8,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import { DetailsForm } from 'components/DetailsForm';
 
 import { changePage } from 'services/active-page-service';
-import { updateProfile } from 'services/firebase-service';
+import { updateProfile, connectFacebook } from 'services/firebase-service';
 
 @connect(s => s)
 export class EditPage extends React.Component {
@@ -30,6 +30,12 @@ export class EditPage extends React.Component {
                 <hr />
                 <p style={{marginTop:5,fontSize:10}}><i>(Everything save as soon as you type)</i></p>
                 <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
+                <hr />
+                <Button bsStyle="default" onClick={$=> dispatch(connectFacebook())}>
+                    <Glyphicon glyph="thumbs-up" />
+                    <span> </span>
+                    link to Facebook
+                </Button>
             </Grid>
         );
     }
