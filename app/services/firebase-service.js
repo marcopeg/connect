@@ -49,6 +49,14 @@ export function initFirebase() {
         // profileRef.child('logins/facebook').once('value', snap => {
         //     var facebookId = snap.val();
         // });
+        
+        // move automatically to edit after login
+        profileRef.child('name').once('value', snap => {
+            var val = snap.val();
+            if (!val) {
+                dispatch(changePage('edit'));
+            }
+        });
 
     }
 }

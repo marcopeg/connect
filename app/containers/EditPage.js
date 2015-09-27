@@ -20,11 +20,13 @@ export class EditPage extends React.Component {
             <div>
                 <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
                 <hr />
-                <Button bsStyle="primary" onClick={$=> dispatch(changePage('start'))}>
-                    <Glyphicon glyph="chevron-left" />
-                    <span> </span>
-                    Back
-                </Button>
+                <div className="text-right">
+                    <Button bsStyle="success" onClick={$=> dispatch(changePage('start'))}>
+                        Ok
+                        <span> </span>
+                        <Glyphicon glyph="ok" />
+                    </Button>
+                </div>
             </div>
         );
     }

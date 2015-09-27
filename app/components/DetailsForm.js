@@ -56,6 +56,7 @@ export class DetailsForm extends React.Component {
                 <Input 
                     type="text" 
                     placeholder="Twitter account"
+                    addonBefore="@"
                     value={twitter} 
                     onChange={this.onChange('twitter')}/>
             </div>
