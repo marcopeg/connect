@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from 'react-bootstrap/lib/Input';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 export class DetailsForm extends React.Component {
 
@@ -12,13 +13,21 @@ export class DetailsForm extends React.Component {
 
     state = {
         name: '',
-        twitter: ''
+        twitter: '',
+        email: '',
+        phone: '',
+        avatar: '',
+        facebook: ''
     }
 
     componentWillMount() {
         this.setState({
             name: this.props.name,
-            twitter: this.props.twitter
+            twitter: this.props.twitter,
+            email: this.props.email,
+            phone: this.props.phone,
+            avatar: this.props.avatar,
+            facebook: this.props.facebook
         });
     }
 
@@ -42,11 +51,10 @@ export class DetailsForm extends React.Component {
 
     render() {
 
-        var { name, twitter } = this.state;
+        var { name, twitter, email, phone, avatar, facebook } = this.state;
 
         return (
             <div>
-                <h4>About Me:</h4>
                 <Input 
                     type="text" 
                     placeholder="Full name"
@@ -59,6 +67,34 @@ export class DetailsForm extends React.Component {
                     addonBefore="@"
                     value={twitter} 
                     onChange={this.onChange('twitter')}/>
+
+                <Input 
+                    type="text" 
+                    placeholder="Email"
+                    addonBefore={<Glyphicon glyph="envelope" />}
+                    value={email} 
+                    onChange={this.onChange('email')}/>
+
+                <Input 
+                    type="text" 
+                    placeholder="Phone number"
+                    addonBefore={<Glyphicon glyph="phone" />}
+                    value={phone} 
+                    onChange={this.onChange('phone')}/>
+
+                <Input 
+                    type="text" 
+                    placeholder="Profile image (url)"
+                    addonBefore={<Glyphicon glyph="picture" />}
+                    value={avatar} 
+                    onChange={this.onChange('avatar')}/>
+
+                <Input 
+                    type="text" 
+                    placeholder="Facebook profile"
+                    addonBefore={<Glyphicon glyph="user" />}
+                    value={facebook} 
+                    onChange={this.onChange('facebook')}/>
             </div>
         );
     }

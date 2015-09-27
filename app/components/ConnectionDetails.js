@@ -14,18 +14,11 @@ export class ConnectionDetails extends React.Component {
 
     render() {
         console.log(this.props);
-        var { name, avatar, twitter, fbUrl, onRemove } = this.props;
+        var { name, avatar, twitter, facebook, phone, email, onRemove } = this.props;
 
-        var avatarStyle = {
-            backgroundImage: ['url(', (avatar || johnDoe), ')'].join('')
-        };
+        // name = name || 'John Doe';
 
-        name = name || 'John Doe';
-
-        var fb, tw, twUrl;
-        if (fbUrl) {
-            fb = <Button bsStyle="primary" href={fbUrl} target="_blank">Ping in Facebook</Button>;
-        }
+        var fb, tw, twUrl, fbUrl;
 
         if (twitter) {
             twUrl = 'http://twitter.com/' + twitter;
@@ -36,11 +29,40 @@ export class ConnectionDetails extends React.Component {
             );
         }
 
+        if (facebook) {
+            fbUrl = 'http://facebook.com/' + facebook;
+            fb = (
+                <p className="connection-details__info">
+                    <Button bsStyle="primary" href={fbUrl} target="_blank">Ping in Facebook</Button>
+                </p>
+            );
+        }
+
+        if (phone) {
+            var phoneUrl = 'tel:' + phone;
+            phone = (
+                <p className="lead">
+                    <Glyphicon glyph="phone" /> <a href={phoneUrl}>{phone}</a>
+                </p>
+            );
+        }
+
+        if (email) {
+            var emailUrl = 'mailto:' + email;
+            email = (
+                <p className="lead">
+                    <Glyphicon glyph="envelope" /> <a href={emailUrl}>{email}</a>
+                </p>
+            );
+        }
+
         return (
             <div className="connection-details text-center">
                 <img src={avatar || johnDoe} className="img-circle" width={160} height={160} />
                 <span className="connection-details__name">{name}</span>
                 {tw}
+                {phone}
+                {email}
                 {fb}
                 {/*
                 <Button bsStyle="danger" onClick={onRemove}>

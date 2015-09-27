@@ -18,6 +18,10 @@ export class ReadPage extends React.Component {
         var { dispatch, items, viewProfile } = this.props;
         var profile = items[viewProfile];
 
+        var { name, twitter } = profile;
+        twitter = twitter ? '@' + twitter : '';
+        name = name || twitter || 'John Doe';
+
         return (
             <Grid fluid>
                 <Row>
@@ -27,7 +31,7 @@ export class ReadPage extends React.Component {
                                 <Glyphicon glyph="chevron-left" />
                             </Button>
                             <span style={{display:'inline-block',marginLeft:20}}>
-                                {profile.name || profile.twitter || 'John Doe'}
+                                {name}
                             </span>
                         </h4>
                         <hr />

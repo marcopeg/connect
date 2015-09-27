@@ -18,13 +18,14 @@ export class ConnectionsListItem extends React.Component {
 
     render() {
 
-        var { name, avatar, onClick } = this.props;
+        var { name, twitter, avatar, onClick } = this.props;
 
         var avatarStyle = {
             backgroundImage: ['url(', (avatar || johnDoe), ')'].join('')
         };
 
-        name = name || 'John Doe';
+        twitter = twitter ? '@' + twitter : '';
+        name = name || twitter || 'John Doe';
 
         return (
             <Grid fluid className="connections-list-item">

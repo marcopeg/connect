@@ -19,15 +19,17 @@ export class EditPage extends React.Component {
 
         return (
             <Grid>
-                <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
-                <hr />
-                <div className="text-right">
-                    <Button bsStyle="success" onClick={$=> dispatch(changePage('start'))}>
-                        Ok
-                        <span> </span>
-                        <Glyphicon glyph="ok" />
+                <h4 style={{margin:0}}>
+                    <Button bsStyle="primary" onClick={$=> dispatch(changePage('start'))}>
+                        <Glyphicon glyph="chevron-left" />
                     </Button>
-                </div>
+                    <span style={{display:'inline-block',marginLeft:20}}>
+                        My Profile
+                    </span>
+                </h4>
+                <hr />
+                <p style={{marginTop:5,fontSize:10}}><i>(Everything save as soon as you type)</i></p>
+                <DetailsForm {...profile} onChange={data => dispatch(updateProfile(data))} />
             </Grid>
         );
     }

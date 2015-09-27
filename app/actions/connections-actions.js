@@ -11,7 +11,9 @@ export function addProfile(profileId, data) {
             name: data.name,
             twitter: data.twitter,
             avatar: data.avatar,
-            fbUrl: data.fbUrl
+            email: data.email,
+            phone: data.phone,
+            facebook: data.facebook,
         }
     };
 }
