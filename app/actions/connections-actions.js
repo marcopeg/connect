@@ -14,6 +14,7 @@ export function addProfile(profileId, data) {
             email: data.email,
             phone: data.phone,
             facebook: data.facebook,
+            notes: data.notes
         }
     };
 }

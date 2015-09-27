@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import Well from 'react-bootstrap/lib/Well';
 
 var johnDoe = require('assets/john-doe.png');
 
@@ -14,7 +15,7 @@ export class ConnectionDetails extends React.Component {
 
     render() {
         console.log(this.props);
-        var { name, avatar, twitter, facebook, phone, email, onRemove } = this.props;
+        var { name, avatar, twitter, facebook, phone, email, notes, onRemove } = this.props;
 
         // name = name || 'John Doe';
 
@@ -56,10 +57,15 @@ export class ConnectionDetails extends React.Component {
             );
         }
 
+        if (notes) {
+            notes = <div><p className="lead">{notes}</p><hr /></div>;
+        }
+
         return (
             <div className="connection-details text-center">
                 <img src={avatar || johnDoe} className="img-circle" width={160} height={160} />
                 <span className="connection-details__name">{name}</span>
+                {notes}
                 {tw}
                 {phone}
                 {email}
